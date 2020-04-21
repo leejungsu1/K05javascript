@@ -1,0 +1,56 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RPSGame.html</title>
+    <script>
+        function gamerule(userNum) {
+            var com = parseInt(Math.random()*3)+1;
+            switch (com) {
+                case 1: com='scissors';  break;
+                case 2: com='rock';  break;
+                case 3: com='paper';  break;
+            }
+            var user = document.getElementById("game_user"); 
+            user.src = "./images/"+userNum+".jpg";
+            var comNum = document.getElementById("com_user");
+            comNum.src = "./images/"+com+".jpg";
+            if((com-user)==-2 || (com-user)==1){
+                console.log("이겼습니다");
+            }
+            else if((com-user)==-1 || (com-user)==2){
+                console.log("졌습니다");
+            }
+            else if((com-user)==0){
+                console.log("비겼습니다");
+            }
+        
+            var startNum = document.getElementById("start");
+        }
+    </script>
+</head>
+<body>
+    <table width='500' border="1" cellpadding='10'>
+        <tr>
+            <td width='250' height='30' style="font-size: 20px;">컴퓨터</td>
+            <td width='250' height='30' style="font-size: 20px;">나</td>
+        </tr>
+        <tr>
+            <td height='250'><img id="com_user" src="./images/start.png" width="250" alt=""></td>
+            <td height='250'><img id="game_user" src="./images/start.png" width="250" alt=""></td>
+        </tr>
+        <tr>
+            <td colspan="2" height='50'></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <button onclick="gamerule('scissors');">가위</button>
+                <button onclick="gamerule('rock');">바위</button>
+                <button onclick="gamerule('paper');">보</button>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
