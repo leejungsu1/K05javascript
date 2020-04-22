@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>J17CssControl.html</title>
+    <script>
+        var pTag , pSize;
+        window.onload = function () {
+            pTag = document.getElementById("article");
+            pSize = parseInt(pTag.style.fontSize);
+        }
+        function fnArticle(flag) {
+            switch (flag) {
+                case "+":
+                    pSize += 10;
+                    pTag.style.fontSize = pSize+"px";
+                    break;
+                case "-":
+                    pSize -= 10;
+                    pTag.style.fontSize = pSize+"px";
+                    break;
+            
+                case "R":
+                    pTag.style.color = "red";
+                    break;
+                case "G":
+                    pTag.style.color = "green";
+                    break;
+                case "B":
+                    pTag.style.color = "blue";
+                    break;
+                case "Bo":
+                    pTag.style.fontWeight = "bold";
+                    break;
+                case "No":
+                    pTag.style.fontWeight = "normal";
+                    break;
+                case "Ce":
+                    pTag.style.textAlign = "center";
+                    break;
+                case "Le":
+                    pTag.style.textAlign = "left";
+                    break;
+                default:
+                    pTag.style.color = "black"
+            }
+        }
+        /*
+            문제] 글꼴바꾸기 버튼을 계속 누를때마다 아래 5가지
+            폰트가 토글되어 적용될수 있도록 함수를 정의하시오.
+            글꼴 : Verdana, 굴림체, 휴먼옛체, 궁서, Impact
+
+            function setFont(){
+                실행부;
+            }
+        */
+        var fontToggle = 0;//폰트토글을 위한 전역변수
+        function setFont(){
+            //문제에서 주어진 폰트를 배열로 선언
+            var fontArray = ["Verdana","굴림체", "휴먼옛체","궁서","Impact" ];
+            //정수를 5로 나누면 나머지는 0~4까지 생성
+            var fontIndex = fontToggle % 5;
+            //위에서 구한 수를 인덱스로 폰트 설정
+            pTag.style.fontFamily = fontArray[fontIndex];
+            //함수를 호출할때마다 1증가
+            fontToggle++;
+        }
+            // function setFont(){
+            //    var array = new Array(5);
+            //    array[0] ="Verdana";
+            //    array[1] = "굴림체";
+            //    array[2] = "휴먼옛체";
+            //    array[3] = "궁서";
+            //    array[4] = "Impact";
+            //    while(true){
+            //         pTag.style.fontFamily = array[i];
+            //    } 
+            // }
+    </script>
+</head>
+<body>
+    <h2>자바스크립트로 CSS제어하기</h2>
+    <input type="button" value="글꼴바꾸기" onclick="setFont();">
+    <fieldset>
+        <legend>신문기사</legend>
+        <button onclick="fnArticle('+');">+</button>
+        <button onclick="fnArticle('-');">-</button>
+        <button onclick="fnArticle('R');">Red</button>
+        <button onclick="fnArticle('G');">Green</button>
+        <button onclick="fnArticle('B');">Blue</button>
+        <button onclick="fnArticle('');">Black</button>
+        <button onclick="fnArticle('Bo');">볼드체</button>
+        <button onclick="fnArticle('No');">보통체</button>
+        <button onclick="fnArticle('Ce');">가운데정렬</button>
+        <button onclick="fnArticle('Le');">좌측정렬</button>
+        
+    </fieldset>
+    <p style="font-size: 12px;" id="article">
+        오늘의 뉴스<br>
+        김경란-노정진 커플이 ‘3단 스킨십’으로 인해 ‘우다사 시스터즈’의 질투와 부러움을 유발한다.
+        <br><br><br><br>
+        22일 밤 11시 방송하는 MBN ‘우리 다시 사랑할 수 있을까2’(이하 ‘우다사2’) 6회에서는 김경란과 노정진이 ‘연인들의 성지’ 북악 스카이웨이에서 데이트를 즐기는 모습이 공개된다.
+        <br><br><br><br>
+        앞서 두 사람은 일명 ‘경란이 엄마’로 통하는 배우 선우용여에게 연애 합격점을 받아, 이날 더욱 홀가분하고 설레는 마음으로 북악산 데이트에 나선다. 특히 전보다 자신감이 붙은 노정진은 “우리 둘만의 인생컷을 만들어 보자”고 제안하며 첫 커플 사진 촬영을 한다.
+        <br><br><br><br>
+        이에 두 사람은 북악 스카이웨이에 설치된 스티커 사진관에서 다정한 포즈를 취해 핑크빛 분위기를 연출한다. 다정하게 손을 잡고 팔짱을 끼는 것은 물론, 볼맞춤, 어깨동무 등으로 달달한 스킨십을 선보이는 것. 나아가 노정진은 김경란이 쌀쌀한 날씨와 거센 바람에 추워하자 “제가 안아드릴게요”라며 ‘백허그’한다.
+        <br><br><br><br>
+        VCR로 두 사람을 지켜보던 ‘우다사 시스터즈’는 “너무 빠르다”면서도 “이런 거 보면 진짜 연애하고 싶다”며 환호한다. 특히 박은혜는 “둘이 정말 잘 됐으면 좋겠다. 정말 간절하다”고 감정이입(?) 한다.
+        <br><br><br><br>
+        김경란은 주위의 응원에 쑥스러워하며 “저 때는 정말 제 정신이 아니었다”라고 털어놓고, 이에 ‘우다사 시스터즈’는 “제발 제 정신 차리지 마!”, “망가지고 정신줄 놓더라도 더 예쁘고 행복해 보인다”라며 다시 한 번 김경란을 응원한다.
+        <br><br><br><br>
+        한편 이날 방송에서는 배우 이지안이 이필모, 서수연 부부를 초대해 홈파티를 여는 모습과 박은혜, 이지안이 ‘명상 선생님’으로 곽정은을 모시고, 함께 진정한 자아를 찾아가는 명상 수업을 받는 모습으로 웃음과 힐링을 선사한다.
+        <br><br><br><br>
+    </p>
+</body>
+</html>
