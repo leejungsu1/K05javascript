@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>upDownGame.html</title>
+    <style>
+        #game_count{
+            font-size: 25px;
+            font-weight: bold;
+        }
+        #hint{
+            width: 250px;
+            height: 250px;
+            padding-top: 10px;
+        }
+        #user{
+            text-align: right;
+            width: 60px;
+            height: 20px;
+        }
+    </style>
+    <script>
+        function com() {
+            var com = parseInt(Math.random()*100)+1;
+            console.log("com",com);
+        }
+        function gameRule() {
+            var gameCount = 0;
+            while(gameCount<=7){
+                var user = document.getElementById("user");
+                console.log(user);
+                if(com>user){
+                    obj = "down";
+                    var gameHint = document.getElementById("hint");
+                    gameHint.src = "./images/"+obj+".jpg";
+                }
+                else if(com<user){
+                    obj = "up";
+                    var gameHint = document.getElementById("hint");
+                    gameHint.src = "./images/"+obj+".jpg";
+                }
+                else if(com==user){
+                    obj = "answer";
+                    var gameHint = document.getElementById("hint");
+                    gameHint.src = "./images/"+obj+".jpeg";
+                }
+                else if(user>100 || user<0){
+                    alert("1~100사이의 숫자를 입력하세요");
+                    gameCount--;
+                }
+                gameCount++;
+                document.getElementById("game_count").innerHTML = gameCount;
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>업다운게임</h2>
+    <h3>1~100사이의 숫자를 입력하세요</h3>
+    시도횟수 :  <span id="game_count"></span>회<br>
+    숫자입력 : <input type="number" id="user" onfocus="com();">
+             <input type="button" value="확인" onclick="gameRule(this)" id="next"><br>
+    <img src="./images/updowngame.jpg" id="hint">
+</body>
+</html>
