@@ -21,46 +21,87 @@
         }
     </style>
     <script>
-        function com() {
-            var com = parseInt(Math.random()*100)+1;
-            console.log("com",com);
-        }
-        function gameRule() {
-            var gameCount = 0;
-            while(gameCount<=7){
-                var user = document.getElementById("user");
-                console.log(user);
-                if(com>user){
+        // function com() {
+        //     var com = parseInt(Math.random()*100)+1;
+        //     console.log("com",com);
+        // }
+        /*
+        난수생성구간을 1(최소) - 100(최대)로 설정했다면
+        (Math.random() * 최대값)+최소값
+        해당 구간의 난수가 생성된다.
+        */
+        var gameCount = 0;
+        var com;
+        window.onload = function(){
+                com = parseInt(Math.random()*100)+1;
+                console.log("com",com);
+         } 
+        function gameRule(obj) {
+            if(gameCount==7){
+                alert("게임횟수가 초과하였습니다.");
+                //페이지에 대한 새로고침. F5를 누른것과 동일하다.
+                document.getElementById("reStart").style.display = "";
+                // location.reload();
+                // return;
+            }
+            else if(gameCount<=7){
+                var user = document.getElementById("user").value;
+                console.log("user",user);
+                if(user==""){
+                    window.setTimeout("alert_1()",50);
+                    obj = "error";
+                    var gameHint = document.getElementById("hint");
+                    gameHint.src = "./images/"+obj+".jpg";
+                    gameCount--;
+                }
+                else if(user>100 || user<0){
+                    window.setTimeout("alert_1()",50);
+                    obj = "error";
+                    var gameHint = document.getElementById("hint");
+                    gameHint.src = "./images/"+obj+".jpg";
+                    gameCount--;
+                }
+                else if(com<user){
                     obj = "down";
                     var gameHint = document.getElementById("hint");
                     gameHint.src = "./images/"+obj+".jpg";
                 }
-                else if(com<user){
+                else if(com>user){
                     obj = "up";
                     var gameHint = document.getElementById("hint");
                     gameHint.src = "./images/"+obj+".jpg";
                 }
                 else if(com==user){
                     obj = "answer";
+                    window.setTimeout("alert_2()",50);
                     var gameHint = document.getElementById("hint");
                     gameHint.src = "./images/"+obj+".jpeg";
-                }
-                else if(user>100 || user<0){
-                    alert("1~100사이의 숫자를 입력하세요");
-                    gameCount--;
+                    document.getElementById("reStart").style.display = "";
                 }
                 gameCount++;
                 document.getElementById("game_count").innerHTML = gameCount;
-            }
+            } 
+        }
+        function reStart() {
+            location.reload();
+            return;
+        }
+        function alert_1() {
+            alert("1~100사이의 숫자를 입력하세요");
+        }
+        function alert_2() {
+            alert("정답입니다.");
         }
     </script>
 </head>
 <body>
     <h2>업다운게임</h2>
     <h3>1~100사이의 숫자를 입력하세요</h3>
-    시도횟수 :  <span id="game_count"></span>회<br>
-    숫자입력 : <input type="number" id="user" onfocus="com();">
-             <input type="button" value="확인" onclick="gameRule(this)" id="next"><br>
+    시도횟수 :  <span id="game_count">0</span>회<br>
+    숫자입력 : <input type="number" id="user" /*onfocus="com();"*/>
+             <input type="button" value="확인" onclick="gameRule(this)" id="next">
+             <input type="button" value="재시작" id="reStart" style="display: none;" onclick="reStart();">
+             <br>
     <img src="./images/updowngame.jpg" id="hint">
 </body>
 </html>
