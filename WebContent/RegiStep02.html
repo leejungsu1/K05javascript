@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>회원가입</title>
+    <style>
+        table{
+            border: 1px solid black;
+            padding: 100px;
+        }
+        #return{
+            border: 1px solid black;
+            background-color: white;
+            width: 120px;
+            height: 40px;
+            margin-left: 50px;
+        }
+        #next{
+            border: 1px solid black;
+            background-color: white;
+            width: 120px;
+            height: 40px;
+            margin-left: 50px;
+        }
+        td{
+            padding: 10px;
+        }
+        #next:hover{
+            background-color: #e5e5e5;
+        }
+        #return:hover{
+            background-color: #e5e5e5;
+        }
+    </style>
+</head>
+<body>
+    <form action="./RegiStep03.jsp" method="post" name="log_in2">
+        <table>
+            <tr>
+                <td>아이디</td>
+                <td><input type="text" id="id"></td>
+               
+            </tr>
+            <tr>
+                <td>비밀번호</td>
+                <td><input type="password" id="pw"></td>
+               
+            </tr>
+            <tr>
+                <td>이메일</td>
+                <td><input type="text" id="e_mail"></td>
+               
+            </tr>
+            <tr>
+                <td>성별</td>
+                <td>
+                    <label><input type="radio" name="sex" id="sex">남자</label>
+                    <label><input type="radio" name="sex" id="sex">여자</label>
+                </td>
+               
+            </tr>
+            <tr>
+                <td><input type="button" value="이전" src="RegiStep01.html" id="return"></td>
+                <td><input type="button" value="다음" src="./RegiStep03.jsp" id="next" 
+                    onclick="email_ide();"></td>
+            </tr>
+        </table>
+    </form>
+
+    <script>
+        function login_form() {
+            var f = document.log_in2;
+            if(f.id.value==''){
+                alert("아이디를 입력해 주세요");
+                f.id.focus();
+                return;
+            }
+            
+            if(f.pw.value==''){
+                alert("비밀번호를 입력해 주세요");
+                f.pw.focus();
+                return;
+            }
+            
+            if(f.e_mail.value==""){
+                alert("이름을 입력해주세요");
+                f.e_mail.focus();
+                return;
+            }
+        }
+        function email_ide() {
+            var e = document.log_in2;
+            if(!(e.e_mail.value.contains("@") && e.e_mail.value.contains("."))){
+                alert("이메일 형식이 아님");
+            }
+        }
+    </script>
+</body>
+</html>

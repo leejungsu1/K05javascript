@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실명인증</title>
+    <style>
+        #name{
+            width:355px
+        }
+        #jumin1{
+            width: 150px;
+        }
+        #jumin2{
+            width: 150px;
+        }
+        table{
+            padding: 100px;
+            border: 1px solid black;
+        }
+        td{
+            padding: 10px;
+        }
+        #next{
+           margin-left: 325px;
+           width: 120px;
+           height: 40px;
+           border: 1px solid black;
+           background-color: white;
+        }
+        #next:hover{
+            background-color: #e5e5e5;
+        }
+    </style>
+</head>
+<body>
+    <form action="./RegiStep02.jsp" method="post" name="log_in">
+        <table>
+           <tr>
+               <td>주민번호</td>
+               <td><input id="jumin1" type="text" maxlength="6"
+                 onkeyup="commonFocusMove(this,6,'jumin2')";></td>
+               <td>-</td>
+               <td><input id="jumin2" type="text" maxlength="7" 
+                onkeyup="commonFocusMove(this,7,'name');"></td>
+           </tr>
+           <tr>
+               <td>이름</td>
+               <td colspan="3"><input id="name" type="text"></td>
+           </tr>
+           <tr>
+               <td colspan="4">
+                   <input id="next" type="button" value="다음" src="./RegiStep02.html" 
+                                    onclick="login_form();">
+                </td>
+           </tr>
+       </table>
+    </form>
+    <script>
+        function login_form() {
+            var f = document.log_in;
+            if(f.jumin1.value==''){
+                alert("주민번호앞자리를 입력해 주세요");
+                f.jumin1.focus();
+                return;
+            }
+           
+            if(f.jumin2.value==''){
+                alert("주민번호뒷자리를 입력해 주세요");
+                f.jumin2.focus();
+                return;
+            }
+           
+            if(f.name.value==""){
+                alert("이름을 입력해주세요");
+                f.name.focus();
+                return;
+            }
+        }
+        function commonFocusMove(obj, mLength, next_obj){
+            var strLength = obj.value.length;
+            if(strLength>=mLength){
+                document.getElementById(next_obj).focus();
+            }
+            else{
+                alert("주민번호자리수를 확인하세요");
+            }     
+        }
+    </script>
+</body>
+</html>
