@@ -14,7 +14,7 @@
         #jumin2{
             width: 150px;
         }
-        table{
+        #table{
             padding: 100px;
             border: 1px solid black;
         }
@@ -31,18 +31,24 @@
         #next:hover{
             background-color: #e5e5e5;
         }
+        div{
+            text-align: left;
+            border: 1px solid black;
+        }
     </style>
 </head>
 <body>
-    <form action="./RegiStep02.jsp" method="post" name="log_in">
+    <form action="./RegiStep02.html" method="post" name="log_in" onsubmit="return login_form();">
+        <div>
+            실명확인
+        </div>
+        <div id="table">
         <table>
            <tr>
                <td>주민번호</td>
-               <td><input id="jumin1" type="text" maxlength="6"
-                 onkeyup="commonFocusMove(this,6,'jumin2')";></td>
+               <td><input id="jumin1" type="text" maxlength="6"></td>
                <td>-</td>
-               <td><input id="jumin2" type="text" maxlength="7" 
-                onkeyup="commonFocusMove(this,7,'name');"></td>
+               <td><input id="jumin2" type="text" maxlength="7"></td>
            </tr>
            <tr>
                <td>이름</td>
@@ -50,42 +56,45 @@
            </tr>
            <tr>
                <td colspan="4">
-                   <input id="next" type="button" value="다음" src="./RegiStep02.html" 
-                                    onclick="login_form();">
+                   <input id="next" type="submit" value="다음">
                 </td>
            </tr>
        </table>
+    </div>
     </form>
     <script>
         function login_form() {
-            var f = document.log_in;
-            if(f.jumin1.value==''){
+            var j1 = document.getElementById("jumin1").value;
+            var j2 = document.getElementById("jumin2").value;
+            var n = document.getElementById("name").value;
+            if(j1==''){
                 alert("주민번호앞자리를 입력해 주세요");
-                f.jumin1.focus();
+                j1.focus();
                 return;
             }
-           
-            if(f.jumin2.value==''){
+            if(j1.length<6){
+                alert("주민번호앞자리를 확인해주세요");
+                j1.focus();
+                return;
+            }
+            if(j2==''){
                 alert("주민번호뒷자리를 입력해 주세요");
-                f.jumin2.focus();
+                j2.focus();
                 return;
             }
-           
-            if(f.name.value==""){
+            if(j2.length<7){
+                alert("주민번호뒷자리를 확인해주세요");
+                j2.focus();
+                return;
+            }
+            if(n==""){
                 alert("이름을 입력해주세요");
-                f.name.focus();
+                n.focus();
                 return;
             }
+          //  window.location.href="RegiStep02.html";
         }
-        function commonFocusMove(obj, mLength, next_obj){
-            var strLength = obj.value.length;
-            if(strLength>=mLength){
-                document.getElementById(next_obj).focus();
-            }
-            else{
-                alert("주민번호자리수를 확인하세요");
-            }     
-        }
+       
     </script>
 </body>
 </html>

@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>회원가입</title>
     <style>
-        table{
+        #table{
             border: 1px solid black;
-            padding: 100px;
+            padding: 120px;
         }
         #return{
             border: 1px solid black;
@@ -32,69 +32,82 @@
         #return:hover{
             background-color: #e5e5e5;
         }
+        div{
+            text-align: left;
+            border: 1px solid black;
+        }
     </style>
 </head>
 <body>
-    <form action="./RegiStep03.jsp" method="post" name="log_in2">
+    <form action="./RegiStep03.jsp" name="log_in2" 
+    							onsubmit="return login_form();">
+        <div>
+           	 회원가입
+        </div>
+        <div id="table">
         <table>
             <tr>
                 <td>아이디</td>
-                <td><input type="text" id="id"></td>
+                <td><input type="text" id="id" name="id"></td>
                
             </tr>
             <tr>
                 <td>비밀번호</td>
-                <td><input type="password" id="pw"></td>
+                <td><input type="password" id="pw" name="pw"></td>
                
             </tr>
             <tr>
                 <td>이메일</td>
-                <td><input type="text" id="e_mail"></td>
+                <td><input type="text" id="e_mail" name="e_mail"></td>
                
             </tr>
             <tr>
                 <td>성별</td>
                 <td>
-                    <label><input type="radio" name="sex" id="sex">남자</label>
-                    <label><input type="radio" name="sex" id="sex">여자</label>
+                    <label><input type="radio" value="man" name="sex" id="sex">남자</label>
+                    <label><input type="radio" value="woman" name="sex" id="sex" checked = "checked">여자</label>
                 </td>
                
             </tr>
             <tr>
-                <td><input type="button" value="이전" src="RegiStep01.html" id="return"></td>
-                <td><input type="button" value="다음" src="./RegiStep03.jsp" id="next" 
-                    onclick="email_ide();"></td>
+                <td><input type="button" value="이전" onclick="login_form2();" id="return"></td>
+                <td><input type="submit" value="다음" id="next" ></td>
             </tr>
         </table>
+    </div>
     </form>
 
     <script>
-        function login_form() {
-            var f = document.log_in2;
-            if(f.id.value==''){
+         function login_form() {
+            var i = document.getElementById("id").value;
+            var p = document.getElementById("pw").value;
+            var e = document.getElementById("e_mail").value;
+            if(i==''){
                 alert("아이디를 입력해 주세요");
-                f.id.focus();
-                return;
+                i.focus();
+                return false;
             }
-            
-            if(f.pw.value==''){
+            if(p==''){
                 alert("비밀번호를 입력해 주세요");
-                f.pw.focus();
-                return;
+                p.focus();
+                return false;
             }
-            
-            if(f.e_mail.value==""){
-                alert("이름을 입력해주세요");
-                f.e_mail.focus();
-                return;
+            if(e==""){
+                alert("이메일을 입력해주세요");
+                e.focus();
+                return false;
             }
+            if(e.indexOf("@")==-1 && e.indexOf(".")==-1){
+                alert("이메일 형식이 아닙니다");
+                e.focus();
+                return false;
+            }
+            //window.location.href="RegiStep03.jsp";
         }
-        function email_ide() {
-            var e = document.log_in2;
-            if(!(e.e_mail.value.contains("@") && e.e_mail.value.contains("."))){
-                alert("이메일 형식이 아님");
-            }
-        }
+        function login_form2() {
+            window.location.href="RegiStep01.html";
+        }    
+       
     </script>
 </body>
 </html>
